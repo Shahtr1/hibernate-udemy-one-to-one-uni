@@ -1,0 +1,116 @@
+Q1 -> What is Cascade?
+A  -> We can cascade operations
+	Apply the same operations to related entities.
+	If we save one, it will also apply the same to related one.
+	Also if we delete an instructor, we should also delete their instructor detail.
+	
+Q2 -> What are Fetch Types: Eager vs Lazy Loading?
+A  -> When we fetch / retrieve data, should we retrieve everything?
+	EAGER will retrieve everything
+	LAZY will retrieve on request
+	
+Q3 -> What is an Entity Lifecycle?
+A  -> Detach:
+		if entity is detached, it is not associated with a Hibernate session
+	Merge:
+		if instance is detached from session, then merge will reattach to session
+	Persist:
+		Transitions new instances to managed state. Next flush / commit will save in db
+	Remove:
+		Transitions managed entity to be removed. Next flush / commit will save in db
+	Refresh:
+		Reload / sync object with data from db. Prevents stale data
+		
+Q4 -> What are @OneToOne - Cascade Types?
+A  -> Persist:
+		If entity is persisted / saved, related entity will also be persisted
+	Remove:
+		If entity is removed / deleted, related entity will also be deleted
+	Refresh:
+		if entity is refreshed, related entity will also be refreshed
+	Detach:
+		If entity is detached ( not associated w/ session ), then related entity will also be detached
+	Merge:
+		if entity is merged, then related entity will also be, merged
+	All:
+		All of above cascade types
+	
+	By default, no operations are cascaded
+	
+Q5 -> Define mappedBy?
+A  -> mappedBy tells Hibernate
+	public class InstructorDetail {
+		...	
+		@OneToOne(mappedBy = "instructorDetail", cascade=CascadeType.ALL)
+		private Instructor instructor;
+	}
+	
+	public class Instructor {
+		...
+		@OneToOne(cascade=CascadeType.ALL)
+		@JoinColumn(name="instructor_detail_id)
+		private InstructorDetail instructorDetail;
+	}
+	
+	1.	Look at the instructorDetail property in the Instructor class
+	2.	Use information from the Instructor class @JoinColumn
+	3.	To help find associated instructor
+	
+
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
